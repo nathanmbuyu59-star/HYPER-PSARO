@@ -1,0 +1,5 @@
+-- HYPER-PSARO database schema
+-- Scaffold initial.
+-- Le fichier hyperpsaro.sql historique n'était pas présent dans l'arbre courant
+-- de main au moment de la création de cette structure.
+-- Ajouter ici le schéma MariaDB validé avant le déploiement.

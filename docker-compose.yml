@@ -1,0 +1,23 @@
+services:
+  database:
+    image: mariadb:11
+    container_name: hyper-psaro-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: hyperpsaro
+      MARIADB_USER: hyperpsaro
+      MARIADB_PASSWORD: ${DB_PASSWORD:-change-me}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-change-root-me}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - hyperpsaro_db_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  hyperpsaro_db_data:
